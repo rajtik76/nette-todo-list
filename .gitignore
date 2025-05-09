@@ -1,7 +1,8 @@
 .idea
-vendor
-node_modules
+/vendor
+/node_modules
+.env
 
 # Nette framework
-temp
+/temp
 log/

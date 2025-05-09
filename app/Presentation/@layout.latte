@@ -1,18 +1,25 @@
+{* Main layout template for the entire application *}
 <!DOCTYPE html>
 <html>
 <head>
+	{* Meta tags for character encoding and responsive design *}
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<link href="./css/app.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{* Main stylesheet *}
+	<link href="/css/app.css" rel="stylesheet">
 
-	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Web</title>
+	{* Dynamic page title with fallback *}
+	<title>{ifset title}{include title|stripHtml} | {/ifset}Todo List</title>
 </head>
 
-<body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+<body class="bg-gray-100 min-h-screen">
+	{* Flash messages display (success, error, info) with appropriate styling *}
+	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type, 'p-4 mb-4 rounded-lg text-center', $flash->type === 'success' ? 'bg-green-100 text-green-800' : ($flash->type === 'error' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800')">{$flash->message}</div>
 
+	{* Main content from child templates *}
 	{include content}
 
+	{* JavaScript section that can be extended by child templates *}
 	{block scripts}
 	<script src="https://unpkg.com/nette-forms@3"></script>
 	{/block}

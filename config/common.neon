@@ -9,7 +9,7 @@ application:
 
 
 database:
-	dsn: 'sqlite::memory:'
+	dsn: 'sqlite:%appDir%/../temp/todo.sqlite'
 	user:
 	password:
 

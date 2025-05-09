@@ -1,0 +1,66 @@
+{* Main content block for the Todo List page *}
+{block content}
+<div class="max-w-2xl mx-auto my-8 p-6 bg-white rounded-xl shadow-lg">
+    <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">Todo List</h1>
+
+    {* Form for adding new todo items *}
+    {form todoForm, class => 'mb-6 flex gap-2'}
+        <div class="flex-grow">
+            {input text}
+            {if $form['text']->hasErrors()}
+                <div class="text-red-500 text-sm mt-1">{$form['text']->getError()}</div>
+            {/if}
+        </div>
+        {input add}
+    {/form}
+
+    {* AJAX-refreshable snippet for the todo list *}
+    {snippet todoList}
+        <div class="space-y-3">
+            {* Display todos if there are any *}
+            {if count($todos) > 0}
+                {foreach $todos as $todo}
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <div class="flex items-center gap-3">
+                            <a n:href="toggleTodo! $todo->getId()" class="ajax">
+                                <div class="w-6 h-6 flex items-center justify-center border-2 rounded-full {$todo->isCompleted() ? 'border-green-500 bg-green-100' : 'border-gray-300'}">
+                                    {if $todo->isCompleted()}
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500"
+                                             viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                  clip-rule="evenodd"/>
+                                        </svg>
+                                    {/if}
+                                </div>
+                            </a>
+                            <span class="{$todo->isCompleted() ? 'line-through text-gray-500' : 'text-gray-800'}">{$todo->getText()}</span>
+                        </div>
+                        <a n:href="deleteTodo! $todo->getId()" class="ajax text-red-500 hover:text-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                 fill="currentColor">
+                                <path fill-rule="evenodd"
+                                      d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                        </a>
+                    </div>
+                {/foreach}
+            {else}
+                {* Empty state when no todos exist *}
+                <div class="text-center py-6 text-gray-500">
+                    No todos yet. Add your first one above!
+                </div>
+            {/if}
+        </div>
+    {/snippet}
+</div>
+
+{* JavaScript for AJAX functionality *}
+{block scripts}
+    {include parent}
+    <script src="https://unpkg.com/naja@2/dist/Naja.min.js"></script>
+    <script>
+        naja.initialize();
+    </script>
+{/block}

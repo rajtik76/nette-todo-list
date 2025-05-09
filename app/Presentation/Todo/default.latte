@@ -61,6 +61,8 @@
     {include parent}
     <script src="https://unpkg.com/naja@2/dist/Naja.min.js"></script>
     <script>
-        naja.initialize();
+        document.addEventListener('DOMContentLoaded', () => {
+            naja.initialize();
+        })
     </script>
 {/block}

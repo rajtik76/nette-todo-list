@@ -35,6 +35,7 @@ final class TodoRepository
 
     /**
      * Retrieves all todo items from the database, ordered by creation date (newest first).
+     * @return array<Todo> Array of Todo objects
      */
     public function findAll(): array
     {
@@ -42,11 +43,13 @@ final class TodoRepository
             ->order('created_at DESC')
             ->fetchAll();
 
-        return array_map(fn($row) => $this->createTodoFromRow($row), $rows);
+        return array_map(fn(Nette\Database\Table\ActiveRow $row): Todo => $this->createTodoFromRow($row), $rows);
     }
 
     /**
      * Finds a todo item by its ID.
+     * @param int $id The ID of the todo item to find
+     * @return Todo|null The found Todo object or null if not found
      */
     public function findById(int $id): ?Todo
     {
@@ -60,46 +63,60 @@ final class TodoRepository
     /**
      * Updates an existing todo item in the database.
      * Currently only updates the 'completed' status.
+     * @param Todo $todo The todo item to update
      */
     public function save(Todo $todo): void
     {
-        $this->database->table('todos')->where('id', $todo->getId())->update([
+        $data = [
             'completed' => $todo->isCompleted(),
-        ]);
+        ];
+
+        $this->database->table('todos')
+            ->where('id', $todo->getId())
+            ->update($data);
     }
 
     /**
      * Creates a new todo item in the database.
+     * @param string $text The text content of the todo item
+     * @return Todo The created Todo object
      */
     public function insert(string $text): Todo
     {
-        $row = $this->database->table('todos')->insert([
+        $data = [
             'text' => $text,
             'completed' => false,
-            'created_at' => date('U'),
-        ]);
+            'created_at' => (int) date('U'),
+        ];
+
+        $row = $this->database->table('todos')->insert($data);
 
         return $this->createTodoFromRow($row);
     }
 
     /**
      * Deletes a todo item from the database by its ID.
+     * @param int $id The ID of the todo item to delete
      */
     public function delete(int $id): void
     {
-        $this->database->table('todos')->where('id', $id)->delete();
+        $this->database->table('todos')
+            ->where('id', $id)
+            ->delete();
     }
 
     /**
      * Creates a Todo object from a database row.
+     * @param Nette\Database\Table\ActiveRow $row Database row with todo data
+     * @return Todo Created Todo object
      */
     private function createTodoFromRow(Nette\Database\Table\ActiveRow $row): Todo
     {
         return new Todo(
-            $row->id,
-            $row->text,
+            (int) $row->id,
+            (string) $row->text,
             (bool) $row->completed,
-            $row->created_at,
+            (int) $row->created_at,
         );
     }
 }

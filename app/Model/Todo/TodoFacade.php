@@ -18,6 +18,7 @@ final class TodoFacade
 
     /**
      * Retrieves all todo items.
+     * @return array<Todo> Array of Todo objects
      */
     public function findAll(): array
     {
@@ -26,6 +27,8 @@ final class TodoFacade
 
     /**
      * Creates a new todo item.
+     * @param string $text The text content of the todo item
+     * @return Todo The created Todo object
      */
     public function createTodo(string $text): Todo
     {
@@ -34,6 +37,8 @@ final class TodoFacade
 
     /**
      * Toggles the completion status of a todo item.
+     * @param int $id The ID of the todo item to toggle
+     * @return Todo|null The updated Todo object or null if not found
      */
     public function toggleTodo(int $id): ?Todo
     {
@@ -48,6 +53,7 @@ final class TodoFacade
 
     /**
      * Deletes a todo item.
+     * @param int $id The ID of the todo item to delete
      */
     public function deleteTodo(int $id): void
     {

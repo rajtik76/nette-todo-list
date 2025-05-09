@@ -7,6 +7,11 @@ namespace App\Model\Todo;
 /**
  * Entity class representing a Todo item.
  * Contains properties and methods for managing a single todo item.
+ *
+ * @property int $id
+ * @property string $text
+ * @property bool $completed
+ * @property int $created_at
  */
 final class Todo
 {
@@ -45,6 +50,7 @@ final class Todo
 
     /**
      * Gets the creation timestamp of the todo item.
+     * @return int The creation timestamp
      */
     public function getCreatedAt(): int
     {

@@ -26,7 +26,9 @@ final class TodoPresenter extends Nette\Application\UI\Presenter
      */
     public function renderDefault(): void
     {
-        $this->template->todos = $this->todoFacade->findAll();
+        /** @var array<\App\Model\Todo\Todo> $todos */
+        $todos = $this->todoFacade->findAll();
+        $this->template->todos = $todos;
 
         if ($this->isAjax()) {
             $this->redrawControl('todoList');
@@ -35,6 +37,7 @@ final class TodoPresenter extends Nette\Application\UI\Presenter
 
     /**
      * Creates and configures the todo form component.
+     * @return Form The configured form component
      */
     protected function createComponentTodoForm(): Form
     {
@@ -55,6 +58,8 @@ final class TodoPresenter extends Nette\Application\UI\Presenter
     /**
      * Handles the successful submission of the todo form.
      * Creates a new todo and updates the UI accordingly.
+     * @param Form $form The submitted form
+     * @param \stdClass $values Object containing form values
      */
     public function todoFormSucceeded(Form $form, \stdClass $values): void
     {
@@ -71,6 +76,7 @@ final class TodoPresenter extends Nette\Application\UI\Presenter
     /**
      * Handles the toggle action for a todo item.
      * Toggles the completion status and updates the UI.
+     * @param int $id The ID of the todo item to toggle
      */
     public function handleToggleTodo(int $id): void
     {
@@ -86,6 +92,7 @@ final class TodoPresenter extends Nette\Application\UI\Presenter
     /**
      * Handles the delete action for a todo item.
      * Removes the todo from the database and updates the UI.
+     * @param int $id The ID of the todo item to delete
      */
     public function handleDeleteTodo(int $id): void
     {

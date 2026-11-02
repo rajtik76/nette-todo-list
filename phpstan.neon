@@ -5,4 +5,11 @@ parameters:
 	level: 8
 	paths:
 		- app
+		- tests
+	excludePaths:
+		- tests/temp (?)
+		- tests/output (?)
 	tmpDir: temp/phpstan
+	fileExtensions:
+		- php
+		- phpt

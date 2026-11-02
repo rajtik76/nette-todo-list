@@ -42,8 +42,10 @@
 			"Composer\\Config::disableProcessTimeout",
 			"@php -dxdebug.mode=off ./vendor/bin/phpstan analyze"
 		],
+		"tester": "tester tests/ -C",
 		"review": [
-			"@phpstan"
+			"@phpstan",
+			"@tester"
 		]
 	}
 }

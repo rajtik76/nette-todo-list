@@ -6,3 +6,6 @@
 # Nette framework
 /temp
 log/
+# Tests
+/tests/temp
+/tests/output

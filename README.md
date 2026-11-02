@@ -62,6 +62,16 @@ A simple, elegant todo list application built with the Nette Framework and Tailw
    npm run watch
    ```
 
+## Testing
+
+Tests use [Nette Tester](https://tester.nette.org), static analysis runs PHPStan at level 8.
+
+```bash
+composer tester
+composer phpstan
+composer review   # both
+```
+
 ## Project Structure
 
 - `app/` - Application source code

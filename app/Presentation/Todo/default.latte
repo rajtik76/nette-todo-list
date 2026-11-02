@@ -1,9 +1,7 @@
-{* Main content block for the Todo List page *}
 {block content}
 <div class="max-w-2xl mx-auto my-8 p-6 bg-white rounded-xl shadow-lg">
     <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">Todo List</h1>
 
-    {* Form for adding new todo items *}
     {form todoForm, class => 'mb-6 flex gap-2'}
         <div class="flex-grow">
             {input text}
@@ -14,10 +12,8 @@
         {input add}
     {/form}
 
-    {* AJAX-refreshable snippet for the todo list *}
     {snippet todoList}
         <div class="space-y-3">
-            {* Display todos if there are any *}
             {if count($todos) > 0}
                 {foreach $todos as $todo}
                     <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
@@ -47,7 +43,6 @@
                     </div>
                 {/foreach}
             {else}
-                {* Empty state when no todos exist *}
                 <div class="text-center py-6 text-gray-500">
                     No todos yet. Add your first one above!
                 </div>
@@ -56,7 +51,6 @@
     {/snippet}
 </div>
 
-{* JavaScript for AJAX functionality *}
 {block scripts}
     {include parent}
     <script src="https://unpkg.com/naja@2/dist/Naja.min.js"></script>

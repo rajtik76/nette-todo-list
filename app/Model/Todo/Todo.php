@@ -4,65 +4,48 @@ declare(strict_types=1);
 
 namespace App\Model\Todo;
 
-/**
- * Entity class representing a Todo item.
- * Contains properties and methods for managing a single todo item.
- *
- * @property int $id
- * @property string $text
- * @property bool $completed
- * @property int $created_at
- */
+
 final class Todo
 {
-    public function __construct(
-        private int $id,
-        private string $text,
-        private bool $completed = false,
-        private ?int $createdAt = null,
-    ) {
-        $this->createdAt = $createdAt ?? time();
-    }
+	private int $createdAt;
 
-    /**
-     * Gets the ID of the todo item.
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
 
-    /**
-     * Gets the text content of the todo item.
-     */
-    public function getText(): string
-    {
-        return $this->text;
-    }
+	public function __construct(
+		private int $id,
+		private string $text,
+		private bool $completed = false,
+		?int $createdAt = null,
+	) {
+		$this->createdAt = $createdAt ?? time();
+	}
 
-    /**
-     * Checks if the todo item is completed.
-     */
-    public function isCompleted(): bool
-    {
-        return $this->completed;
-    }
 
-    /**
-     * Gets the creation timestamp of the todo item.
-     * @return int The creation timestamp
-     */
-    public function getCreatedAt(): int
-    {
-        return $this->createdAt;
-    }
+	public function getId(): int
+	{
+		return $this->id;
+	}
 
-    /**
-     * Toggles the completion status of the todo item.
-     * If it was completed, it becomes incomplete, and vice versa.
-     */
-    public function toggle(): void
-    {
-        $this->completed = !$this->completed;
-    }
+
+	public function getText(): string
+	{
+		return $this->text;
+	}
+
+
+	public function isCompleted(): bool
+	{
+		return $this->completed;
+	}
+
+
+	public function getCreatedAt(): int
+	{
+		return $this->createdAt;
+	}
+
+
+	public function toggle(): void
+	{
+		$this->completed = !$this->completed;
+	}
 }

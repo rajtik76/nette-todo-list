@@ -60,12 +60,14 @@ A simple, elegant todo list application built with the Nette Framework and Tailw
 
 ## Testing
 
-Tests use [Nette Tester](https://tester.nette.org), static analysis runs PHPStan at level 8.
+Tests use [Nette Tester](https://tester.nette.org), static analysis runs PHPStan at level 8 and code style is checked by [DressCode](https://dresscode.run) with the Nette preset.
 
 ```bash
 composer tester
-composer phpstan
-composer review   # both
+composer type:check
+composer cs:check
+composer cs:fix
+composer ci:check   # all checks
 ```
 
 ## Project Structure

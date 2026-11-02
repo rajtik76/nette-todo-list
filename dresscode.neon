@@ -1,0 +1,14 @@
+use:
+	- nette
+
+paths:
+	- app
+	- tests
+
+excludePaths:
+	- tests/temp
+	- tests/output
+
+fileExtensions:
+	- php
+	- phpt

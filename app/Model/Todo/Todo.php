@@ -21,7 +21,7 @@ final class Todo
         private bool $completed = false,
         private ?int $createdAt = null,
     ) {
-        $this->createdAt = $createdAt ?? date('U');
+        $this->createdAt = $createdAt ?? time();
     }
 
     /**

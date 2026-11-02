@@ -40,7 +40,7 @@ final class TodoRepository
     public function findAll(): array
     {
         $rows = $this->database->table('todos')
-            ->order('created_at DESC')
+            ->order('created_at DESC, id DESC')
             ->fetchAll();
 
         return array_map(fn(Nette\Database\Table\ActiveRow $row): Todo => $this->createTodoFromRow($row), $rows);
@@ -86,7 +86,7 @@ final class TodoRepository
         $data = [
             'text' => $text,
             'completed' => false,
-            'created_at' => (int) date('U'),
+            'created_at' => time(),
         ];
 
         $row = $this->database->table('todos')->insert($data);

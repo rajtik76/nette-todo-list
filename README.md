@@ -10,10 +10,6 @@ A simple, elegant todo list application built with the Nette Framework and Tailw
 - SQLite database for data storage
 - Clean MVC architecture
 
-## Screenshots
-
-(Add screenshots here)
-
 ## Requirements
 
 - PHP 8.4 or higher
@@ -120,7 +116,7 @@ npm run watch
 
 ## License
 
-This project is licensed under multiple licenses - see the `composer.json` file for details.
+MIT
 
 ## Contributing
 

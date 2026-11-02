@@ -1,9 +1,8 @@
 {
-	"name": "nette/web-project",
-	"description": "Nette: Standard Web Project",
-	"keywords": ["nette"],
+	"name": "rajtik76/nette-todo-list",
+	"description": "Todo list on Nette, Latte and Tailwind CSS",
 	"type": "project",
-	"license": ["MIT", "BSD-3-Clause", "GPL-2.0-only", "GPL-3.0-only"],
+	"license": "MIT",
 	"require": {
 		"php": ">= 8.4",
 		"nette/application": "^3.2.3",

@@ -66,6 +66,7 @@ final class TodoRepository
 			'completed' => false,
 			'created_at' => time(),
 		]);
+		assert($row instanceof ActiveRow);
 
 		return $this->createTodoFromRow($row);
 	}

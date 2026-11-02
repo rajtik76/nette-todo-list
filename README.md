@@ -1,5 +1,7 @@
 # Nette Todo List
 
+[![CI](https://github.com/rajtik76/nette-todo-list/actions/workflows/ci.yml/badge.svg)](https://github.com/rajtik76/nette-todo-list/actions/workflows/ci.yml)
+
 A simple, elegant todo list application built with the Nette Framework and Tailwind CSS.
 
 ## Features
